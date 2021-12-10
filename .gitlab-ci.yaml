@@ -1,0 +1,21 @@
+stages:
+  - build
+  - deploy
+
+
+build:dynamic:
+  image: node:14.15.1
+  stage: build
+  services:
+    - docker:stable-dind
+  variables:
+    environment: staging
+  script:
+    - ls
+    - npm install
+    - npm build
+    - ls
+  only:
+    - branches
+    - merge_requests
+    - master
